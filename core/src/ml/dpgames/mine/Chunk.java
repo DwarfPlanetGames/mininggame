@@ -2,7 +2,7 @@ package ml.dpgames.mine;
 
 import java.util.HashMap;
 
-import ml.dpgames.mine.objects.blocks.Block;
+import ml.dpgames.mine.objects.Block;
 
 import com.badlogic.gdx.math.Vector2;
 

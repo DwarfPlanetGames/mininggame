@@ -19,13 +19,13 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		/*UPDATE*/{
-			
+			player.update(delta);
 		}
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		/*RENDER*/{
-			
+			player.render(batch);
 		}
 		batch.end();
 	}
