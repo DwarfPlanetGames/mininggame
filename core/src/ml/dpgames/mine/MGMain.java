@@ -10,6 +10,11 @@ import com.badlogic.gdx.graphics.GL20;
 public class MGMain extends Game {
 	
 	public static final int WIDTH = 720, HEIGHT = 480;
+	public static Control control;
+	
+	public MGMain(Control control) {
+		MGMain.control = control;
+	}
 	
 	@Override
 	public void create () {
