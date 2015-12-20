@@ -1,5 +1,8 @@
 package ml.dpgames.mine.screens;
 
+import java.util.HashMap;
+
+import ml.dpgames.mine.Chunk;
 import ml.dpgames.mine.MGMain;
 import ml.dpgames.mine.objects.Player;
 
@@ -13,6 +16,7 @@ public class GameScreen implements Screen {
 	private static final SpriteBatch batch = new SpriteBatch();
 	public static final OrthographicCamera camera = TitleScreen.camera;
 	public static final Player player = new Player(new Vector2(0,0));
+	public static HashMap<Vector2, Chunk> chunks = new HashMap<Vector2, Chunk>();
 
 	@Override
 	public void show() {
@@ -28,11 +32,17 @@ public class GameScreen implements Screen {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		batch.setColor(1, 1, 1, 1);
 		/*RENDER*/{
+			renderChunks(batch);
 			player.render(batch);
 			MGMain.control.render(batch);
 		}
 		batch.end();
+	}
+	
+	public void renderChunks(SpriteBatch batch) {
+		
 	}
 
 	@Override

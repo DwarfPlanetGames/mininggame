@@ -4,11 +4,13 @@ import java.util.HashMap;
 
 import ml.dpgames.mine.objects.Block;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Chunk {
 	
 	public static final int chunkSize = 8;
+	public static final Texture blockSheet = new Texture("blockSheet.png");
 	private final HashMap<Vector2, Block> blocks = new HashMap<Vector2, Block>();
 
 	public Block getBlock(int x, int y) {

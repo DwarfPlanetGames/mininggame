@@ -1,11 +1,14 @@
 package ml.dpgames.mine.desktop;
 
+import ml.dpgames.mine.Control;
+import ml.dpgames.mine.MGMain;
+import ml.dpgames.mine.objects.Player;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import ml.dpgames.mine.Control;
-import ml.dpgames.mine.MGMain;
 
 public class MGDesktop {
 	public static void main (String[] arg) {
@@ -17,6 +20,21 @@ public class MGDesktop {
 
 			@Override
 			public void update(float delta) {
+				int mx = 0, my = 0;
+				if (Gdx.input.isKeyPressed(Keys.W)) {
+					my++;
+				}
+				if (Gdx.input.isKeyPressed(Keys.S)) {
+					my--;
+				}
+				if (Gdx.input.isKeyPressed(Keys.D)) {
+					mx++;
+				}
+				if (Gdx.input.isKeyPressed(Keys.A)) {
+					mx--;
+				}
+				Player.motion.x = mx;
+				Player.motion.y = my;
 			}
 		}), config);
 	}
