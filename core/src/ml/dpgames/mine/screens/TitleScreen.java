@@ -29,7 +29,7 @@ public class TitleScreen implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		/*RENDER*/{
-
+			// TODO: C'mon, Austin. This is for you!
 		}
 		batch.end();
 	}
