@@ -35,6 +35,11 @@ public class MGDesktop {
 				}
 				Player.motion.x = mx;
 				Player.motion.y = my;
+				if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
+					Player.speed = 160 * 8;
+				} else {
+					Player.speed = 160;
+				}
 			}
 		}), config);
 	}

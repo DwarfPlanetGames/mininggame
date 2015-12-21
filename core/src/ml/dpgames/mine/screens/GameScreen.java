@@ -5,6 +5,7 @@ import java.util.Random;
 
 import ml.dpgames.mine.Chunk;
 import ml.dpgames.mine.MGMain;
+import ml.dpgames.mine.objects.Block;
 import ml.dpgames.mine.objects.Player;
 
 import com.badlogic.gdx.Screen;
@@ -45,7 +46,18 @@ public class GameScreen implements Screen {
 	}
 	
 	public void renderChunks(SpriteBatch batch) {
-		
+		int xl = (int)(Player.position.x / Block.size / Chunk.chunkSize);
+		int yl = (int)(Player.position.y / Block.size / Chunk.chunkSize);
+		for (int x = xl - 2; x <= xl + 1; x++) {
+			for (int y = yl - 2; y <= yl + 1; y++) {
+				Chunk chunk = chunks.get(new Vector2(x,y));
+				if (chunk != null) {
+					chunk.render(batch, x, y);
+				} else {
+					chunks.put(new Vector2(x,y), new Chunk(x,y));
+				}
+			}
+		}
 	}
 
 	@Override
