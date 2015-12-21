@@ -1,6 +1,7 @@
 package ml.dpgames.mine.screens;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import ml.dpgames.mine.Chunk;
 import ml.dpgames.mine.MGMain;
@@ -17,6 +18,8 @@ public class GameScreen implements Screen {
 	public static final OrthographicCamera camera = TitleScreen.camera;
 	public static final Player player = new Player(new Vector2(0,0));
 	public static HashMap<Vector2, Chunk> chunks = new HashMap<Vector2, Chunk>();
+	public static final long seed = System.nanoTime();
+	public Random rand = new Random(seed);
 
 	@Override
 	public void show() {
