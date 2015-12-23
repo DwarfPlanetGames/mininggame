@@ -16,7 +16,7 @@ public class MGMain extends Game {
 	public static Control control;
 	private static final LinkedList<Object> printQueue = new LinkedList<Object>();
 	public static String worldName = "defaultWorld";
-	public static String saveLoc = ".weeds";
+	public static String saveLoc = ".ml.dpgames/mininggame";
 
 	public MGMain(Control control) {
 		MGMain.control = control;
