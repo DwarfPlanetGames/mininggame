@@ -1,5 +1,8 @@
 package ml.dpgames.mine;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -8,18 +11,20 @@ import ml.dpgames.mine.objects.blocks.LeafBlock;
 import ml.dpgames.mine.objects.blocks.StoneBlock;
 import ml.dpgames.mine.objects.blocks.WoodBlock;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Chunk {
+public class Chunk implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	public static final int chunkSize = 32;
 	public static final Texture blockSheet = new Texture("block_sheet.png");
 	private final HashMap<Vector2, Block> blocks = new HashMap<Vector2, Block>();
 	// private final HashMap<Vector2, TextureRegion> backgrounds = new
 	// HashMap<Vector2, TextureRegion>();
-	public static final long seed = System.nanoTime();
+	public static long seed = System.nanoTime();
 	public int type; // 0 - plains; 1 - forest; 2 - cave; 3 - desert;
 	public int x, y;
 
@@ -70,6 +75,9 @@ public class Chunk {
 
 	public boolean[][] generateRawMap(long seed) {
 		Random rand = new Random(seed);
+		for (int i = 0; i < 10; i++) {
+			rand.nextInt();
+		}
 		type = rand.nextInt(4);
 		int chance = new int[] { 25, 40, 52, 52 }[type];
 		boolean[][] map = new boolean[chunkSize][chunkSize];
@@ -145,7 +153,13 @@ public class Chunk {
 	}
 
 	public void close() {
-		// TODO: Write chunk to file
+		System.out.println("Writing chunk " + x + " " + y + " to file");
+		try {
+			ObjectOutputStream os = new ObjectOutputStream(Gdx.files.external(MGMain.saveLoc + "/" + MGMain.worldName + "/world/" + x + ":" + y + ".bin").write(false));
+			os.writeObject(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

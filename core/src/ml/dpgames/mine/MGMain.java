@@ -2,6 +2,7 @@ package ml.dpgames.mine;
 
 import java.util.LinkedList;
 
+import ml.dpgames.mine.screens.GameScreen;
 import ml.dpgames.mine.screens.TitleScreen;
 
 import com.badlogic.gdx.Game;
@@ -14,6 +15,8 @@ public class MGMain extends Game {
 	public static final int WIDTH = 1080, HEIGHT = 720;
 	public static Control control;
 	private static final LinkedList<Object> printQueue = new LinkedList<Object>();
+	public static String worldName = "defaultWorld";
+	public static String saveLoc = ".weeds";
 
 	public MGMain(Control control) {
 		MGMain.control = control;
@@ -45,5 +48,11 @@ public class MGMain extends Game {
 
 	public static void println(Object o) {
 		printQueue.add(o + "\n");
+	}
+	
+	@Override
+	public void dispose() {
+		GameScreen.chunks.clear();
+		System.gc();
 	}
 }

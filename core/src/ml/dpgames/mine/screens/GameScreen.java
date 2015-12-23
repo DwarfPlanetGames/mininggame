@@ -8,6 +8,8 @@ import ml.dpgames.mine.MGMain;
 import ml.dpgames.mine.objects.Block;
 import ml.dpgames.mine.objects.Player;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,6 +32,10 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		/*UPDATE*/{
+			if (Gdx.input.isKeyPressed(Keys.R)) {
+				chunks.clear();
+				Chunk.seed = System.nanoTime();
+			}
 			MGMain.control.update(delta);
 			player.update(delta);
 		}
@@ -46,18 +52,23 @@ public class GameScreen implements Screen {
 	}
 	
 	public void renderChunks(SpriteBatch batch) {
+		HashMap<Vector2, Chunk> newChunks = new HashMap<Vector2, Chunk>();
 		int xl = (int)(Player.position.x / Block.size / Chunk.chunkSize);
 		int yl = (int)(Player.position.y / Block.size / Chunk.chunkSize);
-		for (int x = xl - 2; x <= xl + 1; x++) {
+		for (int x = (int)(xl - camera.viewportWidth / 2 / Chunk.chunkSize / Block.size) - 1; x <= (int)(xl + camera.viewportWidth / 2 / Chunk.chunkSize / Block.size); x++) {
 			for (int y = yl - 2; y <= yl + 1; y++) {
 				Chunk chunk = chunks.get(new Vector2(x,y));
 				if (chunk != null) {
 					chunk.render(batch, x, y);
 				} else {
-					chunks.put(new Vector2(x,y), new Chunk(x,y));
+					chunk = new Chunk(x,y);
+					chunk.render(batch, x, y);
 				}
+				newChunks.put(new Vector2(x,y), chunk);
 			}
 		}
+		chunks = newChunks;
+		System.gc();
 	}
 
 	@Override

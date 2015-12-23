@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class MGDesktop {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		
 		new LwjglApplication(new MGMain(new Control(){
 			@Override
 			public void render(SpriteBatch batch) {
